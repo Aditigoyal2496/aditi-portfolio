@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditi Goyal — AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#e50914;--bg:#141414;--card:#181818;--card2:#232323;
+  --text:#e5e5e5;--muted:#aaa;--white:#fff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ── PROFILE SELECT ─────────────────────────────────────────────── */
+#screen-select{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:52px;background:radial-gradient(ellipse at 50% 0%, #1c0000 0%, #141414 60%)}
+.n-logo{font-family:'Bebas Neue',sans-serif;font-size:54px;color:var(--red);letter-spacing:6px}
+.select-title{font-size:30px;font-weight:300;color:var(--white)}
+.profiles{display:flex;gap:56px}
+.prof{display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;transition:transform .2s}
+.prof:hover{transform:scale(1.06)}
+.prof:hover .prof-name{color:var(--white)}
+.prof:hover .prof-avatar{border-color:var(--white)}
+.prof-avatar{width:130px;height:130px;border-radius:6px;border:3px solid transparent;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--white);transition:border-color .2s}
+.prof-name{font-size:16px;color:var(--muted);font-weight:500;transition:color .2s}
+.select-footer{font-size:13px;color:#555;letter-spacing:.5px}
+
+/* ── SCREENS ────────────────────────────────────────────────────── */
+.screen{display:none}
+.screen.on{display:block;animation:fadeIn .35s ease}
+
+/* ── NAV ────────────────────────────────────────────────────────── */
+.n-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:64px;display:flex;align-items:center;gap:20px;background:linear-gradient(180deg,rgba(0,0,0,.9) 0%,transparent 100%);transition:background .3s}
+.n-nav.solid{background:rgba(0,0,0,.95)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--red);letter-spacing:3px;line-height:1}
+.nav-name{font-size:14px;font-weight:600;color:var(--white)}
+.nav-divider{width:1px;height:18px;background:rgba(255,255,255,.2)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:20px}
+.nav-link{font-size:13px;color:var(--muted);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
+.nav-link:hover{color:var(--white)}
+.nav-cta{font-size:13px;font-weight:700;color:var(--white);background:var(--red);border:none;padding:8px 18px;border-radius:3px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.3px;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* ── HERO ───────────────────────────────────────────────────────── */
+.hero{height:88vh;min-height:520px;position:relative;display:flex;align-items:flex-end;padding:0 48px 88px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(20,20,20,.93) 35%,rgba(20,20,20,.1) 100%),linear-gradient(to top,rgba(20,20,20,1) 0%,rgba(20,20,20,0) 45%);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:540px}
+.hero-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;color:var(--red);border:1px solid var(--red);padding:4px 10px;border-radius:2px;margin-bottom:18px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:68px;color:var(--white);line-height:1;margin-bottom:12px;letter-spacing:.5px}
+.hero-meta{font-size:13px;color:var(--red);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.hero-desc{font-size:15px;color:var(--text);line-height:1.65;margin-bottom:28px;max-width:460px}
+.hero-actions{display:flex;gap:12px}
+.btn-play{display:flex;align-items:center;gap:10px;background:var(--white);color:#000;border:none;padding:11px 28px;border-radius:4px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-play:hover{opacity:.82}
+.btn-info{display:flex;align-items:center;gap:10px;background:rgba(109,109,110,.65);color:var(--white);border:none;padding:11px 28px;border-radius:4px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.btn-info:hover{background:rgba(109,109,110,.4)}
+
+/* ── CONTENT ────────────────────────────────────────────────────── */
+.content{padding:0 48px 80px}
+.row-section{margin-bottom:52px}
+.row-title{font-size:18px;font-weight:600;color:var(--white);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.row-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--red)}
+
+/* ── SCROLL ROW ─────────────────────────────────────────────────── */
+.scroll-wrap{position:relative}
+.scroll-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+.scroll-row::-webkit-scrollbar{display:none}
+.sarrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(20,20,20,.85);border:1px solid rgba(255,255,255,.15);color:var(--white);width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0;transition:opacity .2s,background .2s}
+.scroll-wrap:hover .sarrow{opacity:1}
+.sarrow:hover{background:rgba(0,0,0,.95)}
+.sl{left:-19px}.sr{right:-19px}
+
+/* ── METRIC CARDS ───────────────────────────────────────────────── */
+.metric-card{flex-shrink:0;width:164px;background:var(--card);border-radius:6px;padding:20px 16px;border-left:3px solid var(--red);transition:transform .2s,background .2s;cursor:default}
+.metric-card:hover{transform:translateY(-5px);background:var(--card2)}
+.metric-val{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--white);line-height:1;margin-bottom:6px}
+.metric-lbl{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
+.metric-sub{font-size:11px;color:var(--muted)}
+
+/* ── SHOW CARDS ─────────────────────────────────────────────────── */
+.show-wrap{flex-shrink:0;width:200px;cursor:pointer;transition:transform .25s;transform-origin:center bottom;position:relative}
+.show-wrap:hover{transform:scale(1.18);z-index:10}
+.show-card{width:100%;height:112px;border-radius:4px;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;position:relative;overflow:hidden}
+.show-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.05) 100%)}
+.show-type{position:relative;z-index:1;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--red);margin-bottom:2px}
+.show-name{position:relative;z-index:1;font-size:13px;font-weight:600;color:var(--white);line-height:1.3}
+.show-info{opacity:0;transition:opacity .2s;background:var(--card2);padding:12px;border-radius:0 0 4px 4px}
+.show-wrap:hover .show-info{opacity:1}
+.show-desc{font-size:12px;color:var(--text);line-height:1.4;margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:10px;background:rgba(255,255,255,.1);color:var(--muted);padding:2px 8px;border-radius:20px}
+
+/* ── EXPERIENCE ─────────────────────────────────────────────────── */
+.exp-card{background:var(--card);border-radius:6px;padding:20px 24px;margin-bottom:10px;display:flex;align-items:center;gap:20px;border-left:3px solid transparent;transition:border-color .2s,background .2s}
+.exp-card:hover{border-left-color:var(--red);background:var(--card2)}
+.exp-dot{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--white);flex-shrink:0}
+.exp-co{font-size:15px;font-weight:600;color:var(--white)}
+.exp-role{font-size:13px;color:var(--red);margin:2px 0}
+.exp-det{font-size:12px;color:var(--muted)}
+.exp-per{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+
+/* ── SKILLS ─────────────────────────────────────────────────────── */
+.skill-tag{display:inline-block;padding:6px 14px;background:rgba(255,255,255,.07);border-radius:20px;font-size:13px;color:var(--text);margin:4px;white-space:nowrap;transition:background .2s,color .2s;cursor:default}
+.skill-tag:hover{background:rgba(229,9,20,.2);color:var(--white)}
+
+/* ── EPISODE CARDS ──────────────────────────────────────────────── */
+.ep-card{flex-shrink:0;width:278px;background:var(--card);border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .25s;transform-origin:center bottom}
+.ep-card:hover{transform:scale(1.07);z-index:5}
+.ep-thumb{height:160px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+.ep-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(24,24,24,1) 0%,rgba(0,0,0,.05) 100%)}
+.ep-ep{position:relative;z-index:1;font-size:11px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:4px}
+.ep-title{position:relative;z-index:1;font-size:15px;font-weight:600;color:var(--white);line-height:1.3}
+.ep-body{padding:14px 16px 18px}
+.ep-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── ABOUT ──────────────────────────────────────────────────────── */
+.about-sec{display:grid;grid-template-columns:1fr 1fr;gap:44px;background:var(--card);border-radius:8px;padding:44px;margin:40px 0}
+.about-head{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--white);line-height:1.1;margin-bottom:20px}
+.about-p{font-size:15px;color:var(--text);line-height:1.7;margin-bottom:14px}
+.about-items{display:flex;flex-direction:column;gap:16px;justify-content:center}
+.aitem{padding:16px 18px;background:rgba(255,255,255,.03);border-radius:6px;border-left:2px solid var(--red)}
+.aitem-lbl{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--red);margin-bottom:5px}
+.aitem-val{font-size:14px;color:var(--white)}
+
+/* ── CONTACT ────────────────────────────────────────────────────── */
+.contact-sec{background:var(--card);border-radius:8px;padding:44px;text-align:center;margin-bottom:40px}
+.contact-head{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--white);margin-bottom:8px}
+.contact-sub{font-size:15px;color:var(--muted);margin-bottom:28px}
+.contact-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.cbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;text-decoration:none}
+.cbtn:hover{opacity:.83}
+.cbtn-r{background:var(--red);color:var(--white)}
+.cbtn-g{background:rgba(255,255,255,.1);color:var(--white)}
+
+/* ── MODAL ──────────────────────────────────────────────────────── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;align-items:center;justify-content:center;padding:24px}
+.modal-bg.open{display:flex}
+.modal{background:#1c1c1c;border-radius:8px;max-width:660px;width:100%;overflow:hidden;position:relative;max-height:90vh;overflow-y:auto}
+.modal-hero{height:220px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.modal-hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,28,28,1) 0%,rgba(0,0,0,.15) 100%)}
+.modal-type{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--red);position:relative;z-index:1;margin-bottom:4px}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--white);position:relative;z-index:1}
+.modal-body{padding:4px 24px 28px}
+.modal-desc{font-size:15px;color:var(--text);line-height:1.65;margin-top:16px}
+.modal-detail{font-size:14px;color:var(--muted);line-height:1.7;margin-top:12px}
+.mclose{position:absolute;top:14px;right:14px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.2);color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .2s}
+.mclose:hover{background:rgba(0,0,0,.95)}
+
+/* ── FOOTER ─────────────────────────────────────────────────────── */
+.footer{text-align:center;padding:28px 48px;color:#555;font-size:13px;border-top:1px solid rgba(255,255,255,.07)}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────────── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease forwards}
+@keyframes up1{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes up2{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes up3{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.u1{animation:up1 .6s .0s ease both}
+.u2{animation:up2 .6s .15s ease both}
+.u3{animation:up3 .6s .3s ease both}
+</style>
+</head>
+<body>
+
+<!-- ══ PROFILE SELECT ══════════════════════════════════════════════════════ -->
+<section id="screen-select">
+  <div class="n-logo">ADITI</div>
+  <p class="select-title">Who's watching?</p>
+  <div class="profiles">
+    <div class="prof" onclick="go('recruiter')">
+      <div class="prof-avatar" style="background:linear-gradient(135deg,#1a1535,#3d2f7a)">R</div>
+      <span class="prof-name">Recruiter</span>
+    </div>
+    <div class="prof" onclick="go('explorer')">
+      <div class="prof-avatar" style="background:linear-gradient(135deg,#0d2b1f,#0f6e56)">E</div>
+      <span class="prof-name">Explorer</span>
+    </div>
+  </div>
+  <p class="select-footer">AI Product Manager · Bangalore, India · Open to roles</p>
+</section>
+
+<!-- ══ RECRUITER VIEW ══════════════════════════════════════════════════════ -->
+<div id="screen-recruiter" class="screen">
+  <nav class="n-nav" id="rnav">
+    <span class="nav-logo">A</span>
+    <span class="nav-divider"></span>
+    <span class="nav-name">Aditi Goyal</span>
+    <div class="nav-right">
+      <a href="mailto:aditigoyal2496@gmail.com" class="nav-link">Email</a>
+      <a href="https://linkedin.com/in/aditi-goyal-3556b2109" target="_blank" class="nav-link">LinkedIn</a>
+      <a href="https://github.com/Aditigoyal2496" target="_blank" class="nav-link">GitHub</a>
+      <button class="nav-cta" onclick="back()">Switch Profile</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg" style="background:linear-gradient(135deg,#0d1b2a 0%,#0f3460 55%,#1b2838 100%)"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge u1">FEATURED PROJECT</div>
+      <div class="hero-title u2">SkinLaundryWiki</div>
+      <div class="hero-meta u2">Internal AI Agent · RAG · Pinecone · LangSmith</div>
+      <p class="hero-desc u3">Orchestrator + specialist architecture ingesting Confluence, Jira, GitHub, Gmail, and Hotjar into a unified Slack interface. Built end-to-end for a 50-clinic, $5M/mo SaaS business.</p>
+      <div class="hero-actions u3">
+        <button class="btn-play" onclick="openModal('wiki')">▶ &nbsp;View Project</button>
+        <button class="btn-info" onclick="scrollTo2('r-metrics')">ⓘ &nbsp;By the Numbers</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row-section" id="r-metrics">
+      <div class="row-title">By the Numbers <span class="row-label">IMPACT</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="mrow"></div>
+        <button class="sarrow sl" onclick="sr('mrow',-440)">‹</button>
+        <button class="sarrow sr" onclick="sr('mrow',440)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">AI Agent Work <span class="row-label">PROJECTS</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="prow"></div>
+        <button class="sarrow sl" onclick="sr('prow',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('prow',640)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Experience <span class="row-label">TIMELINE</span></div>
+      <div id="econ"></div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Technical Toolkit <span class="row-label">SKILLS</span></div>
+      <div id="scon"></div>
+    </div>
+
+    <div class="contact-sec">
+      <div class="contact-head">Let's Talk</div>
+      <p class="contact-sub">Open to AI PM roles · Available immediately · Bangalore / Remote</p>
+      <div class="contact-links">
+        <a href="mailto:aditigoyal2496@gmail.com" class="cbtn cbtn-r">✉ aditigoyal2496@gmail.com</a>
+        <a href="https://linkedin.com/in/aditi-goyal-3556b2109" target="_blank" class="cbtn cbtn-g">LinkedIn</a>
+        <a href="https://github.com/Aditigoyal2496" target="_blank" class="cbtn cbtn-g">GitHub</a>
+        <a href="tel:+918619778936" class="cbtn cbtn-g">+91 86197 78936</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Aditi Goyal · AI Product Manager · BITS Pilani '19 · Bangalore, India</div>
+</div>
+
+<!-- ══ EXPLORER VIEW ═══════════════════════════════════════════════════════ -->
+<div id="screen-explorer" class="screen">
+  <nav class="n-nav" id="enav">
+    <span class="nav-logo">A</span>
+    <span class="nav-divider"></span>
+    <span class="nav-name">Aditi Goyal</span>
+    <div class="nav-right">
+      <a href="mailto:aditigoyal2496@gmail.com" class="nav-link">Email</a>
+      <a href="https://linkedin.com/in/aditi-goyal-3556b2109" target="_blank" class="nav-link">LinkedIn</a>
+      <button class="nav-cta" onclick="back()">Switch Profile</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg" style="background:linear-gradient(135deg,#1a0000 0%,#3d0000 55%,#0d0000 100%)"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge u1">ORIGIN STORY</div>
+      <div class="hero-title u2">The Retention<br>Problem</div>
+      <div class="hero-meta u2">Field Research · SMB Clinics · Beauty & Wellness</div>
+      <p class="hero-desc u3">I walked into two beauty clinics with a notebook. Staff were juggling 4+ tools just to understand one client. That fragmentation became the insight that drove 30% fewer churned members.</p>
+      <div class="hero-actions u3">
+        <button class="btn-play" onclick="openModal('retention')">▶ &nbsp;Read the Story</button>
+        <button class="btn-info" onclick="scrollTo2('e-stories')">ⓘ &nbsp;Product Stories</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row-section" id="e-stories">
+      <div class="row-title">Product Stories <span class="row-label">SEASON 1</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="srow"></div>
+        <button class="sarrow sl" onclick="sr('srow',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('srow',640)">›</button>
+      </div>
+    </div>
+
+    <div class="about-sec">
+      <div>
+        <div class="about-head">I build AI agents that make businesses run better.</div>
+        <p class="about-p">I'm Aditi — AI PM based in Bangalore. I started in edtech, built learning products for millions of students, then moved into beauty & wellness SaaS and started shipping AI agents.</p>
+        <p class="about-p">I care about the gap between what AI promises and what it actually ships. I own the full stack — user research, architecture decisions, eval pipelines, A/B tests, and the metrics that say whether it worked.</p>
+        <p class="about-p">Currently at Skin Laundry, building retention and booking AI for 50+ clinics. Looking for 0→1 AI product roles where I can do the same.</p>
+      </div>
+      <div class="about-items">
+        <div class="aitem"><div class="aitem-lbl">Currently Building</div><div class="aitem-val">Retention & loyalty agents for beauty businesses</div></div>
+        <div class="aitem"><div class="aitem-lbl">Based In</div><div class="aitem-val">Bangalore, India · Open to remote</div></div>
+        <div class="aitem"><div class="aitem-lbl">Education</div><div class="aitem-val">B.E. (Hons.) · BITS Pilani · 2019</div></div>
+        <div class="aitem"><div class="aitem-lbl">Availability</div><div class="aitem-val">Immediately · 0→1 roles preferred</div></div>
+      </div>
+    </div>
+
+    <div class="contact-sec">
+      <div class="contact-head">Let's Build Something</div>
+      <p class="contact-sub">0→1 AI PM roles · Full ownership from day one</p>
+      <div class="contact-links">
+        <a href="mailto:aditigoyal2496@gmail.com" class="cbtn cbtn-r">✉ aditigoyal2496@gmail.com</a>
+        <a href="https://linkedin.com/in/aditi-goyal-3556b2109" target="_blank" class="cbtn cbtn-g">LinkedIn</a>
+        <a href="https://github.com/Aditigoyal2496" target="_blank" class="cbtn cbtn-g">GitHub</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Aditi Goyal · AI Product Manager · BITS Pilani '19 · Bangalore, India</div>
+</div>
+
+<!-- ══ MODAL ═══════════════════════════════════════════════════════════════ -->
+<div class="modal-bg" id="mbg" onclick="closeBg(event)">
+  <div class="modal" id="mc"></div>
+</div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────────────────
+
+const M = [
+  {v:"40%",l:"Membership Renewal Lift",s:"Perfect Corp AI Integration"},
+  {v:"$1.8M",l:"Revenue Unlocked",s:"Checkout A/B Experiment"},
+  {v:"18→6%",l:"Guardrail Violations",s:"LLM Eval Pipeline"},
+  {v:"25K",l:"Bookings / Month",s:"LLM Booking Agent"},
+  {v:"30%",l:"Retention Lift",s:"23K Member Base"},
+  {v:"25%",l:"Conversion Lift",s:"Booking Agent Pilot"},
+  {v:"35%",l:"Faster Booking Decisions",s:"Pilot A/B"},
+  {v:"50+",l:"Clinics in Production",s:"Multi-Tenant SaaS"},
+  {v:"1M+",l:"Students Reached",s:"BYJU's · K-10"},
+  {v:"60%",l:"Team Efficiency Gain",s:"BYJU's Agile Redesign"},
+];
+
+const P = [
+  {id:"llm",title:"LLM Booking Agent",type:"AI Agent",bg:"linear-gradient(135deg,#0d1b2a,#0f3460)",tags:["LLMs","Conversational AI","25K bookings"],
+   desc:"Replaced rule-based booking flows across 25K monthly bookings. Pilot A/B shows 25% conversion lift and 35% faster booking decisions.",
+   detail:"Built end-to-end: product spec, prompt architecture, eval pipeline, and A/B framework. Reduced guardrail violations from ~18% to ~6% through systematic failure mode classification and a two-track eval pipeline — automated LangSmith traces plus sampled human review."},
+  {id:"wiki",title:"SkinLaundryWiki",type:"Internal AI",bg:"linear-gradient(135deg,#1a0533,#2d1b69)",tags:["RAG","Pinecone","LangSmith","Orchestration"],
+   desc:"Slack-based internal AI agent. Orchestrator + specialist architecture ingesting Confluence, Jira, GitHub, Gmail, and Hotjar via daily sync.",
+   detail:"Orchestrator routes queries to specialist sub-agents (Jira, GitHub, Docs, Analytics) based on intent classification. RAG on Pinecone for semantic retrieval across all sources. LangSmith tracing for full observability. Replaced 3–5 minutes of context-switching per query for a 10+ person team."},
+  {id:"pc",title:"Perfect Corp AI",type:"AI/ML",bg:"linear-gradient(135deg,#1a0000,#4a0000)",tags:["AI Integration","Retention","40% renewals"],
+   desc:"End-to-end AI skin-analysis integration. Drove 40% higher membership renewals and 30% retention lift across 23K members.",
+   detail:"Owned the full integration: vendor evaluation, API integration, staff-facing UI, personalization dashboard, and outcome measurement. Giving staff real-time data about client skin progress unlocked the conversations that drive renewals."},
+  {id:"ret",title:"Retention Snapshot",type:"Product Design",bg:"linear-gradient(135deg,#0a1628,#1e3a5f)",tags:["Research","Churn Prediction","SMB"],
+   desc:"Client retention module surfacing cancellation risk signals to front-of-house staff. Built directly from SMB owner research.",
+   detail:"Discovery interviews across multiple clinic locations revealed 4+ fragmented tools as the core retention failure. Designed a unified snapshot surfacing: membership month, treatment cadence, service variety, progress milestones. Turned research into a shipped feature."},
+  {id:"ios",title:"iOS EMR App",type:"Platform",bg:"linear-gradient(135deg,#001529,#003d6b)",tags:["iOS","Multi-Tenant","Healthcare"],
+   desc:"Native iOS telemedicine + EMR app across 50+ clinics and 100+ staff. Eliminated 24–48hr approval delays.",
+   detail:"Multi-tenant architecture serving 50+ clinic operators with different configurations. End-to-end PM: spec, design, eng collaboration, UAT, rollout. Eliminated 24–48hr approval delays and reduced chart loss rate from 10% to near zero."},
+  {id:"co",title:"Checkout Recovery",type:"Growth",bg:"linear-gradient(135deg,#001a00,#004d00)",tags:["GA4","Sentry","Funnel","$1.8M"],
+   desc:"Diagnosed 60% mobile checkout drop-off. Led A/B experiment reducing failures by 50%, unlocking $1.8M annualized revenue.",
+   detail:"GA4 + Sentry funnel analysis identified three failure clusters: payment gateway timeouts (35%), card input UX friction (30%), session expiry during booking flow (35%). A/B test targeting all three in parallel. Shipped in two sprints. $1.8M annualized revenue unlocked."},
+];
+
+const E = [
+  {i:"SL",co:"Liftoff / Skin Laundry",role:"Product Manager",per:"2023 – Present",det:"AI Agents · 50+ Clinics · $5M/mo SaaS"},
+  {i:"BY",co:"BYJU's Think & Learn",role:"Associate Product Manager",per:"2022 – 2023",det:"Mobile Learning · 1M+ Students"},
+  {i:"BY",co:"BYJU's Think & Learn",role:"Product Developer",per:"2019 – 2022",det:"CMS/LMS · 1:1 Live Learning Platform"},
+];
+
+const SK = ["AI Agent Development","Retention & Loyalty Agent","RAG Pipelines","LLM Evaluation","Prompt Engineering","Conversational AI","Voice AI","Guardrail Design","Churn Prediction","Agentic Orchestration","Python","SQL (PostgreSQL)","Pinecone","LangSmith","GA4","Amplitude","Sentry","Zenoti","A/B Testing","Multi-Tenant SaaS","SMB User Research","Firebase","Agile/Scrum","Stakeholder Management"];
+
+const ST = [
+  {id:"s1",ep:"S1 · E01",title:"The AI Brain for a 50-Clinic Business",type:"Case Study",bg:"linear-gradient(135deg,#0d1b2a,#1b3a5e)",tags:["RAG","Orchestration","LangSmith"],
+   desc:"How I designed and shipped SkinLaundryWiki — an internal knowledge agent connecting five data sources into one Slack interface.",
+   detail:"The architecture: orchestrator routes to specialist agents based on intent. RAG on Pinecone for semantic retrieval. LangSmith tracing on every query. Daily sync keeps sources fresh. Built solo, shipped in six weeks. Replaced hours of weekly context-switching for the product and engineering team."},
+  {id:"s2",ep:"S1 · E02",title:"When 18% of Answers Were Wrong",type:"Engineering",bg:"linear-gradient(135deg,#1a0000,#3a0000)",tags:["LLM Eval","Guardrails","A/B"],
+   desc:"Our LLM booking agent was failing 1 in 5 interactions. I built a two-track eval pipeline that brought failures down to 6%.",
+   detail:"Failure taxonomy: intent misclassification, out-of-scope responses, hallucinated availability, tone violations. Two tracks: automated LangSmith trace analysis for volume detection + sampled human review for nuanced judgment. Each flagged failure improved the eval criteria. 18% → 6% in six weeks."},
+  {id:"s3",ep:"S1 · E03",title:"The $1.8M Funnel Fix",type:"Growth",bg:"linear-gradient(135deg,#001a00,#003d00)",tags:["GA4","Sentry","Funnel"],
+   desc:"A GA4 and Sentry analysis started as a hunch and ended with 50% fewer failed checkouts and $1.8M in recovered revenue.",
+   detail:"60% mobile checkout drop-off. Root causes: payment gateway timeouts, card input friction, session expiry. Designed A/B targeting each cluster. Two sprints. $1.8M annualized. The lesson: diagnosis is the whole job. Once you know the three failure modes exactly, the fix is obvious."},
+  {id:"s4",ep:"S1 · E04",title:"Clinic Diaries",type:"Research",bg:"linear-gradient(135deg,#1a1200,#3a2a00)",tags:["SMB Research","User Interviews","Retention"],
+   desc:"Two clinic visits. 12+ staff conversations. One insight: fragmented client context is the silent killer of retention.",
+   detail:"Staff were cross-referencing Zenoti, Gmail, printed promos, and personal notes before every client arrived. No one could anticipate churn risk. Personalization was guesswork. The research became the Retention Snapshot Module — cancellation risk signals, membership status, personalization cues, in one view."},
+  {id:"s5",ep:"S1 · E05",title:"40% More Renewals with Skin AI",type:"AI/Product",bg:"linear-gradient(135deg,#0d1a0d,#1a3d1a)",tags:["AI Integration","Retention"],
+   desc:"How integrating Perfect Corp's skin AI changed what staff said to clients — and drove 40% higher membership renewals.",
+   detail:"Retention is about staff confidence, not just reminders. Perfect Corp gave staff real data about client skin health over time. Integrated into the consultation flow, it gave front-of-house something specific to say. 40% higher renewals, 30% retention lift across 23K members."},
+  {id:"s6",ep:"S1 · E06",title:"Building for a Million Students",type:"Scale",bg:"linear-gradient(135deg,#0d0d1a,#2d2d5e)",tags:["EdTech","Scale","Data"],
+   desc:"From content creator to APM at BYJU's — iterating on live sessions for 1M+ K-10 students.",
+   detail:"Started as Product Developer on the CMS/LMS. Built root cause analysis on session drop-off — lifted class ratings 4.65 → 4.85, post-class engagement 60% → 85%. Moved to APM leading 10+ people shipping 60+ sessions to 1M+ students. 25% satisfaction lift, 60% efficiency gain through Agile redesign."},
+];
+
+const MODALS = {
+  retention:{title:"The Retention Problem",type:"ORIGIN STORY",bg:"linear-gradient(135deg,#1a0000,#3d0000)",
+   desc:"I walked into two beauty clinics with a notebook. Staff were managing 4+ tools just to understand one client before they arrived.",
+   detail:"The research revealed: staff juggled Zenoti (CRM/POS), Gmail, printed membership sheets, and personal notes for every client interaction. No one could see the full picture — churn risk, promo timing, personalization cues. All invisible. That fragmentation was the core retention failure. The solution became the Retention Snapshot Module — surfacing cancellation risk signals (membership month, treatment cadence, progress) to front-of-house staff in real time. Result: 30% retention lift across 23K members.",tags:[]},
+};
+P.forEach(p=>MODALS[p.id]={title:p.title,type:p.type.toUpperCase(),bg:p.bg,desc:p.desc,detail:p.detail,tags:p.tags});
+ST.forEach(s=>MODALS[s.id]={title:s.title,type:s.type.toUpperCase(),bg:s.bg,desc:s.desc,detail:s.detail,tags:s.tags});
+
+// ── RENDER ──────────────────────────────────────────────────────────────────
+
+function init(){
+  document.getElementById('mrow').innerHTML=M.map(m=>`<div class="metric-card"><div class="metric-val">${m.v}</div><div class="metric-lbl">${m.l}</div><div class="metric-sub">${m.s}</div></div>`).join('');
+
+  document.getElementById('prow').innerHTML=P.map(p=>`
+    <div class="show-wrap" onclick="openModal('${p.id}')">
+      <div class="show-card" style="background:${p.bg}">
+        <div class="show-ov"></div>
+        <div class="show-type">${p.type}</div>
+        <div class="show-name">${p.title}</div>
+      </div>
+      <div class="show-info">
+        <div class="show-desc">${p.desc.slice(0,88)}…</div>
+        <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('econ').innerHTML=E.map(e=>`
+    <div class="exp-card">
+      <div class="exp-dot">${e.i}</div>
+      <div><div class="exp-co">${e.co}</div><div class="exp-role">${e.role}</div><div class="exp-det">${e.det}</div></div>
+      <div class="exp-per">${e.per}</div>
+    </div>`).join('');
+
+  document.getElementById('scon').innerHTML=SK.map(s=>`<span class="skill-tag">${s}</span>`).join('');
+
+  document.getElementById('srow').innerHTML=ST.map(s=>`
+    <div class="ep-card" onclick="openModal('${s.id}')">
+      <div class="ep-thumb" style="background:${s.bg}">
+        <div class="ep-ov"></div>
+        <div class="ep-ep">${s.ep}</div>
+        <div class="ep-title">${s.title}</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-desc">${s.desc}</div>
+        <div class="tags" style="margin-top:10px">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── NAV SCROLL EFFECT ────────────────────────────────────────────────────────
+
+window.addEventListener('scroll',()=>{
+  document.querySelectorAll('.n-nav').forEach(n=>n.classList.toggle('solid',window.scrollY>50));
+});
+
+// ── PROFILE NAV ──────────────────────────────────────────────────────────────
+
+function go(p){
+  document.getElementById('screen-select').style.display='none';
+  const s=document.getElementById('screen-'+p);
+  s.classList.add('on');
+  window.scrollTo(0,0);
+}
+
+function back(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('screen-select').style.display='flex';
+  window.scrollTo(0,0);
+}
+
+function sr(id,amt){document.getElementById(id).scrollBy({left:amt,behavior:'smooth'})}
+function scrollTo2(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+
+function openModal(id){
+  const d=MODALS[id];
+  if(!d)return;
+  document.getElementById('mc').innerHTML=`
+    <div class="mclose" onclick="closeModal()">✕</div>
+    <div class="modal-hero" style="background:${d.bg}">
+      <div class="modal-hero-ov"></div>
+      <div class="modal-type">${d.type}</div>
+      <div class="modal-title">${d.title}</div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">${d.desc}</p>
+      ${d.detail?`<p class="modal-detail">${d.detail}</p>`:''}
+      ${d.tags&&d.tags.length?`<div class="tags" style="margin-top:14px">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
+    </div>`;
+  document.getElementById('mbg').classList.add('open');
+}
+
+function closeModal(){document.getElementById('mbg').classList.remove('open')}
+function closeBg(e){if(e.target===document.getElementById('mbg'))closeModal()}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
