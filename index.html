@@ -148,6 +148,11 @@ a{color:inherit;text-decoration:none}
 .modal-body{padding:4px 24px 28px}
 .modal-desc{font-size:15px;color:var(--text);line-height:1.65;margin-top:16px}
 .modal-detail{font-size:14px;color:var(--muted);line-height:1.7;margin-top:12px}
+.modal-detail .ms{display:block;color:var(--red);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 5px}
+.modal-detail .ms:first-child{margin-top:2px}
+.modal-detail ul{margin:5px 0 0;padding-left:18px}
+.modal-detail li{margin-bottom:5px}
+.modal-detail strong{color:var(--text)}
 .mclose{position:absolute;top:14px;right:14px;z-index:10;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.2);color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .2s}
 .mclose:hover{background:rgba(0,0,0,.95)}
 
@@ -224,11 +229,29 @@ a{color:inherit;text-decoration:none}
     </div>
 
     <div class="row-section">
-      <div class="row-title">AI Agent Work <span class="row-label">PROJECTS</span></div>
+      <div class="row-title">AI Systems <span class="row-label">AGENTS</span></div>
       <div class="scroll-wrap">
-        <div class="scroll-row" id="prow"></div>
-        <button class="sarrow sl" onclick="sr('prow',-640)">‹</button>
-        <button class="sarrow sr" onclick="sr('prow',640)">›</button>
+        <div class="scroll-row" id="prow-ai"></div>
+        <button class="sarrow sl" onclick="sr('prow-ai',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('prow-ai',640)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Product Work <span class="row-label">PM</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="prow-prod"></div>
+        <button class="sarrow sl" onclick="sr('prow-prod',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('prow-prod',640)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Experiments &amp; Research <span class="row-label">R&amp;D</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="prow-exp"></div>
+        <button class="sarrow sl" onclick="sr('prow-exp',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('prow-exp',640)">›</button>
       </div>
     </div>
 
@@ -279,18 +302,36 @@ a{color:inherit;text-decoration:none}
       <p class="hero-desc u3">I walked into two beauty clinics with a notebook. Staff were juggling 4+ tools just to understand one client. That fragmentation became the insight that drove 30% fewer churned members.</p>
       <div class="hero-actions u3">
         <button class="btn-play" onclick="openModal('retention')">▶ &nbsp;Read the Story</button>
-        <button class="btn-info" onclick="scrollTo2('e-stories')">ⓘ &nbsp;Product Stories</button>
+        <button class="btn-info" onclick="scrollTo2('e-stories')">ⓘ &nbsp;See the Work</button>
       </div>
     </div>
   </div>
 
   <div class="content">
     <div class="row-section" id="e-stories">
-      <div class="row-title">Product Stories <span class="row-label">SEASON 1</span></div>
+      <div class="row-title">AI Systems <span class="row-label">AGENTS</span></div>
       <div class="scroll-wrap">
-        <div class="scroll-row" id="srow"></div>
-        <button class="sarrow sl" onclick="sr('srow',-640)">‹</button>
-        <button class="sarrow sr" onclick="sr('srow',640)">›</button>
+        <div class="scroll-row" id="eprow-ai"></div>
+        <button class="sarrow sl" onclick="sr('eprow-ai',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('eprow-ai',640)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Product Work <span class="row-label">PM</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="eprow-prod"></div>
+        <button class="sarrow sl" onclick="sr('eprow-prod',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('eprow-prod',640)">›</button>
+      </div>
+    </div>
+
+    <div class="row-section">
+      <div class="row-title">Experiments &amp; Research <span class="row-label">R&amp;D</span></div>
+      <div class="scroll-wrap">
+        <div class="scroll-row" id="eprow-exp"></div>
+        <button class="sarrow sl" onclick="sr('eprow-exp',-640)">‹</button>
+        <button class="sarrow sr" onclick="sr('eprow-exp',640)">›</button>
       </div>
     </div>
 
@@ -345,24 +386,36 @@ const M = [
 ];
 
 const P = [
-  {id:"llm",title:"LLM Booking Agent",type:"AI Product · 0→1",bg:"linear-gradient(135deg,#0d1b2a,#0f3460)",tags:["Conversion +25%","$150K ARR","LLM vs rule-based","Eval pipeline"],
-   desc:"60% of ad traffic bounced in under two minutes — choice fatigue, not weak intent. I bet on a conversational agent over a rigid funnel.",
-   detail:"<strong>The insight:</strong> 60% of new users from Meta ads were gone within two minutes. Hotjar showed ~70% viewed three or more services but never reached appointment selection — they weren't unconvinced, they were overwhelmed. The rule-based flow made it worse: it forced everyone down pre-defined paths and dead-ended on real queries like “book Full Arms laser and check if my membership covers it.”<br><br><strong>The call:</strong> Improve the rule tree, or replace it. Rule trees only handle paths you predefine — exactly the rigidity costing us conversions. I chose a conversational agent: ask a few questions and narrow options instead of dumping a 15-service menu, and handle multi-intent queries that collapse a rule tree.<br><br><strong>The tradeoffs I owned:</strong> At launch the agent answered confidently out of scope — even drifting toward clinical advice. I accepted that risk to ship, then closed it with intent-based output classification and a two-track eval pipeline (automated LangSmith traces + sampled human review), pulling guardrail violations from ~18% to ~6%. On models, GPT-4 was more accurate on policy (91%) but Claude was warmer (83%) — so I routed by intent: accuracy for money/policy, warmth for discovery, rather than forcing one model to do both.<br><br><strong>The outcome:</strong> In a 5,000-booking-per-cohort A/B pilot, completion went 68% → 85% (25% lift) and time-to-book 8 → 5 minutes. Projected ~$150K annual revenue at full 25K/month volume; the Q1 self-serve push saved front-desk staff 988 hours.<br><br><strong>What I'd do differently:</strong> Build the eval pipeline before launch, not after violations appear. Choose models per use-case from day one instead of hunting for one that does everything. And don't over-index on “be concise” — when the agent dropped conversion-critical info to hit a 2-line limit, I was trading revenue for aesthetics."},
-  {id:"wiki",title:"SkinLaundryWiki",type:"Internal AI",bg:"linear-gradient(135deg,#1a0533,#2d1b69)",tags:["RAG","Pinecone","LangSmith","Orchestration"],
-   desc:"Slack-based internal AI agent. Orchestrator + specialist architecture ingesting Confluence, Jira, GitHub, Gmail, and Hotjar via daily sync.",
-   detail:"Orchestrator routes queries to specialist sub-agents (Jira, GitHub, Docs, Analytics) based on intent classification. RAG on Pinecone for semantic retrieval across all sources. LangSmith tracing for full observability. Replaced 3–5 minutes of context-switching per query for a 10+ person team."},
-  {id:"pc",title:"Perfect Corp AI",type:"Product · Retention",bg:"linear-gradient(135deg,#1a0000,#4a0000)",tags:["Renewals +40%","Retention +30%","Proof over discounts","Vendor + adoption"],
-   desc:"Churn wasn't a pricing problem — clients couldn't see if treatments worked. I bet on objective proof over discounts.",
-   detail:"<strong>The insight:</strong> 23K members spending ~$3K/year weren't churning over price — surveys kept surfacing the same line: “I'm spending a lot, but I don't know if it's working.” Progress was tracked with subjective notes and inconsistent before/after photos. The real risk was a lack of objective proof. I set a new North Star: % of clients completing both a baseline and a progress scan.<br><br><strong>The call:</strong> We weighed discounts, referral multipliers, cancellation-deflection offers, and staff scripts. All band-aids — they ate margin and treated the symptom (people leaving), not the cause (not knowing it works). Perfect Corp's AI scan measured 10+ skin metrics (melasma, pores, dark circles) with side-by-side heatmaps. It solved the actual pain and doubled as a revenue layer: providers could recommend the right next treatment from real data instead of a pushy script.<br><br><strong>How I drove it:</strong> 15+ client and staff interviews before building anything. Pitched leadership on “workflow speed over feature load” — if it added time to appointments, clinics would reject it. Worked directly with Perfect Corp's SDK team on lighting checks and face-positioning, and ran UAT across 7 pilot clinics with weekly feedback loops.<br><br><strong>The outcome:</strong> 40% higher renewals and 30% retention lift across the 23K base, on ~$5M/month MRR. The friction I had to fight: the SDK forced three photos and a full restart if any failed validation — district managers escalated that it slowed appointments, so I negotiated single-photo retakes with the vendor.<br><br><strong>What I'd do differently:</strong> Test the workflow before the pilot — shadow shifts would have caught the retake problem before staff did. Define “good” and build measurement before shipping. And treat staff adoption as the product: the best integration fails if the person holding the iPad resents it, so I'd co-design the flow with clinic teams instead of handing them a finished one."},
-  {id:"ret",title:"Retention Snapshot",type:"Product Design",bg:"linear-gradient(135deg,#0a1628,#1e3a5f)",tags:["Research","Churn Prediction","SMB"],
-   desc:"Client retention module surfacing cancellation risk signals to front-of-house staff. Built directly from SMB owner research.",
-   detail:"Discovery interviews across multiple clinic locations revealed 4+ fragmented tools as the core retention failure. Designed a unified snapshot surfacing: membership month, treatment cadence, service variety, progress milestones. Turned research into a shipped feature."},
-  {id:"ios",title:"iOS EMR App",type:"Product · 0→1",bg:"linear-gradient(135deg,#001529,#003d6b)",tags:["$1M saved/yr","Build vs buy","Ruthless MVP","Medical sign-off"],
-   desc:"Approvals took 1–2 days and 1 in 10 charts vanished — the blocker to scaling past 100 staff. I built the offline-first fix.",
-   detail:"<strong>The problem:</strong> Over 100 clinicians juggled paper charts, desktop tools, and a web EMR to sign off a single treatment. Approvals took 24–48 hours, patients showed up with nothing ready, and spotty clinic Wi-Fi lost 1 in 10 charts in transit. Each approval burned ~$12 in staff time — and leadership flagged it as the blocker to scaling past 100 staff toward 300+.<br><br><strong>Build vs buy:</strong> The incumbent EMR was web-dependent and died on clinic Wi-Fi — the root cause of the chart loss. Clinics were already standardized on managed iPads, so I bet on a native iOS app: offline mode, push-notification approval alerts, 2–3 tap sign-off, native photo capture, syncing to the central DB in the background.<br><br><strong>What I said no to:</strong> To ship, I cut hard — killed role-based form permissions, deferred cosmetic touch-up flows, scrapped the dashboard redesign, and excluded 5 states with unique regulatory rules from V1. I pushed back on marketing's last-minute pricing asks and deferred non-critical DB sync work to protect eng and QA through launch.<br><br><strong>Where I conceded — and why:</strong> Medical leadership rejected moving a clinical assessment step to front-desk intake, and rejected my structured rejection-reason taxonomy in favor of free-text. I conceded both — clinical judgment is non-negotiable — then forced a requirements sign-off to freeze scope so engineering wasn't chasing moving goalposts. In healthcare you don't win arguments with the medical team; you earn trust by respecting their guardrails and optimizing within them.<br><br><strong>The outcome:</strong> Cost per approval dropped from ~$12 to ~$2 (~$1M/year saved), the 24–48hr delay was eliminated, and offline-first took chart loss from 10% to near zero across 50+ clinics and 100+ staff. Two pilot saves mattered most: a race condition that pulled a previous patient's baseline photos into a new chart, and multi-service bookings that failed to surface the required physician-review form — both caught before wide rollout."},
-  {id:"co",title:"Checkout Recovery",type:"Product · Growth",bg:"linear-gradient(135deg,#001a00,#004d00)",tags:["$1.8M recovered","Full-funnel A/B","3 stacked failures","Diagnosis-first"],
-   desc:"Paid traffic was converting below its volume. I traced a 60% mobile checkout cliff to three problems stacked at one step.",
-   detail:"<strong>The insight:</strong> No alarm flagged this — it started as a hunch from reviewing paid-acquisition ROI. Meta Ads drove traffic and users were selecting services, but conversion didn't match the volume. GA4 funnels showed the cliff: 60% of mobile users who picked a service never paid. That gap was bleeding the ROI on every ad dollar.<br><br><strong>My first hypothesis was wrong:</strong> I assumed a backend failure — silent payment errors. Sentry killed that fast: booking APIs were at 99% success. The problem was behavioral, right after service selection. Layering GA4 funnels with Sentry client-side errors isolated three independent failures stacked at one step — payment-gateway timeouts (35%), session expiry mid-flow (35%), and card-input friction on mobile (30%). Fixing any one alone wouldn't move the needle.<br><br><strong>Why I A/B tested instead of just shipping:</strong> Dropping payment friction could pull bookings forward but tank show-up or membership rates. So I tracked the full funnel — First-Time Booked → First-Time Treated → Membership Sold — via VWO with the booking platform's webhooks, and segmented the test by clinic and region behind feature flags to contain the blast radius. The reduced-friction cohort (Apple Pay, Google Pay, optimized manual entry) converted significantly higher with no downstream drop.<br><br><strong>The outcome:</strong> 25K monthly transactions at ~$250 each; cutting failed checkouts ~50% recovered ~$150K/month — $1.8M annualized. Shipped in two sprints.<br><br><strong>What I learned:</strong> Diagnosis is the whole job. I spent 70% of the project in GA4 and Sentry figuring out what was actually happening and 30% on the fix. Most teams invert that — guess at a fix, ship it, and wonder why the number didn't move."},
+  // ── AI Systems ──
+  {id:"llm",sec:"ai",title:"LLM Booking Agent",type:"AI · 0→1",bg:"linear-gradient(135deg,#0d1b2a,#0f3460)",tags:["LLM","LangSmith","A/B pilot"],
+   desc:"Replaced rule-based booking with a conversational LLM for 25K monthly bookings.",
+   detail:"<b class='ms'>The Setup</b>New users from Meta ads were bouncing ~60% within two minutes. The old rule-based booking flow forced everyone down rigid paths and dead-ended on multi-intent questions. Choice fatigue was killing conversion — not a lack of demand.<b class='ms'>The Hard Part</b>Rule trees only handle paths you predefine, so I bet on an LLM — but a customer-facing agent talking about money and treatments is a guardrail problem. It launched answering out of scope, even drifting toward clinical advice. No single model did everything: GPT-4 was more accurate on policy (91%), Claude warmer (83%). And over-tight “be concise” prompting made it drop conversion-critical info.<b class='ms'>What I Did</b><ul><li>Replaced the rule-based funnel with a conversational GPT-powered booking agent</li><li>Built a two-track eval pipeline — automated LangSmith traces + sampled human review</li><li>Added intent-based output classification to contain out-of-scope answers</li><li>Routed by intent: accuracy-first for policy/payment, warmth-first for discovery</li></ul><b class='ms'>Outcomes</b><ul><li>Guardrail violations: 18% → 6%</li><li>Booking completion: 68% → 85% (25% lift) in pilot A/B</li><li>Time-to-book: 8 → 5 min; ~$150K projected annual revenue</li></ul><b class='ms'>What I Learned</b>Build the eval pipeline before launch, not after — your evaluation system is the product."},
+  {id:"wiki",sec:"ai",title:"SkinLaundryWiki",type:"AI · Internal Tooling",bg:"linear-gradient(135deg,#1a0533,#2d1b69)",tags:["RAG","Pinecone","Orchestration","LangSmith"],
+   desc:"Slack agent for product/eng — orchestrator + specialist pattern, RAG on Pinecone.",
+   detail:"<b class='ms'>The Setup</b>Product and engineering burned 3–5 minutes per question context-switching across Confluence, Jira, GitHub, and email to answer things like “why did we change this?” or “what's the status of X?” The knowledge existed — it was just scattered across five tools.<b class='ms'>The Hard Part</b>A single RAG bot over five messy sources returns confident-but-wrong answers. The hard parts were routing (different questions need different retrieval), chunk quality, and teaching the agent to admit “I don't know” instead of hallucinating when confidence was low.<b class='ms'>What I Did</b><ul><li>Built an orchestrator that routes to specialist agents for RCA, concept lookup, change history, and entity queries</li><li>Ingested Confluence, Jira, GitHub (5 repos), and Gmail via daily incremental sync</li><li>Tuned RAG on Pinecone — 400–600 token chunks, 10–20% overlap, an LLM-generated summary per chunk</li><li>Set a 0.60 confidence floor with live Confluence fallback; traced everything via LangSmith</li><li>Beyond the agent — in code/security review of a 7,300-line PR, caught a critical authorization gap: endpoints missing ownership verification, exposing unauthenticated data modification</li></ul><b class='ms'>Outcomes</b><ul><li>Cross-tool lookups: 3–5 min → one Slack question</li><li>Five data sources unified behind a single agent interface</li><li>Full observability via LangSmith traces</li></ul><b class='ms'>What I Learned</b>Retrieval quality and a “know when to say I don't know” floor matter more than which model you pick."},
+  {id:"promo",sec:"ai",title:"Slack Promo Agent",type:"AI · Ops Automation",bg:"linear-gradient(135deg,#08231a,#0f6e56)",tags:["Slack","PostgreSQL","GitHub PRs"],
+   desc:"Removes the developer bottleneck from promo workflows — validates, executes, ships in minutes.",
+   detail:"<b class='ms'>The Setup</b>Every promotional code change required engineering. A small, repeatable database change turned into a 2+ day round trip between marketing/ops and developers — a standing bottleneck on a routine task.<b class='ms'>The Hard Part</b>Letting a non-technical team run production database changes safely is the whole challenge. You can't just expose a button that runs SQL — it needs input validation, guardrails, and an auditable trail so nothing slips through unreviewed.<b class='ms'>What I Did</b><ul><li>Built a Slack agent marketing/ops drive directly, with no engineer in the loop</li><li>Agent validates input before touching anything</li><li>Executes the PostgreSQL updates and auto-generates a GitHub PR for review and audit trail</li></ul><b class='ms'>Outcomes</b><ul><li>Promo change time: 2+ days → 3–5 minutes</li><li>Engineering removed from the loop for routine promo changes</li></ul><b class='ms'>What I Learned</b>Handing a risky action to a non-technical team lives or dies on validation and an audit trail."},
+  // ── Product Work ──
+  {id:"co",sec:"product",title:"Checkout Recovery",type:"Growth",bg:"linear-gradient(135deg,#001a00,#004d00)",tags:["GA4","Sentry","VWO","$1.8M"],
+   desc:"Diagnosed 60% mobile drop-off, A/B tested the fix, unlocked $1.8M revenue.",
+   detail:"<b class='ms'>The Setup</b>60% of mobile users dropped off during checkout. It started as a hunch from paid-acquisition ROI — traffic and service selection looked healthy, but conversion didn't match, bleeding the return on every ad dollar.<b class='ms'>The Hard Part</b>My first hypothesis was wrong: I assumed backend payment failures, but Sentry showed booking APIs at 99% success. The real issue was three independent failure clusters stacked at one step. And removing checkout friction risked pulling bookings forward while quietly tanking show-up and membership downstream.<b class='ms'>What I Did</b><ul><li>Instrumented the funnel with GA4 + Sentry; isolated 3 clusters: gateway timeouts, card-input friction, session expiry</li><li>Designed a targeted fix per cluster (Apple/Google Pay, optimized manual entry, session handling)</li><li>A/B tested via VWO, tracking the full funnel: Booked → Treated → Membership</li><li>Segmented by clinic and region behind feature flags to contain blast radius</li></ul><b class='ms'>Outcomes</b><ul><li>Failed checkouts: reduced 50%</li><li>Revenue: +$1.8M annualized (~$150K/mo across 25K transactions @ ~$250)</li></ul><b class='ms'>What I Learned</b>Diagnosis is the whole job — I spent 70% of the time figuring out what was happening and 30% on the fix."},
+  {id:"ios",sec:"product",title:"iOS EMR App",type:"0→1",bg:"linear-gradient(135deg,#001529,#003d6b)",tags:["iOS","Offline-first","Healthcare"],
+   desc:"Offline-first iOS app for 50+ clinics — eliminated chart loss and approval delays.",
+   detail:"<b class='ms'>The Setup</b>Clinical approvals took 24–48 hours and 1 in 10 charts were lost in transit. Clinicians juggled paper, desktop, and a web EMR that died on spotty clinic Wi-Fi — capping throughput and blocking the scale from 100 to 300+ staff.<b class='ms'>The Hard Part</b>Build vs buy: the incumbent web EMR was the root cause, not a fixable symptom. Shipping in regulated healthcare meant cutting scope hard and conceding to medical leadership on clinical-workflow calls — you don't win those arguments, you build trust and optimize within the guardrails.<b class='ms'>What I Did</b><ul><li>Built a native, offline-first iOS telemedicine + EMR app (clinics already ran managed iPads)</li><li>Designed the clinical-decision approval workflows — 2–3 tap sign-off with push alerts</li><li>Cut V1 scope ruthlessly: killed role permissions, deferred cosmetic flows, excluded 5 regulated states</li><li>Froze scope with a formal medical sign-off so engineering wasn't chasing moving goalposts</li></ul><b class='ms'>Outcomes</b><ul><li>Approval time: 24–48 hrs → eliminated</li><li>Chart loss: 10% → near zero</li><li>Ops cost: ~$1M/yr saved across 50+ clinics, 100+ staff, 25K bookings/mo</li></ul><b class='ms'>What I Learned</b>In regulated products the constraint is the design space — ship to the 80% you can serve safely and sequence the rest."},
+  {id:"pc",sec:"product",title:"Perfect Corp AI",type:"Retention",bg:"linear-gradient(135deg,#1a0000,#4a0000)",tags:["Computer Vision","Retention","Vendor"],
+   desc:"CV-based skin analysis driving 40% renewal lift — proved treatments work to cut churn.",
+   detail:"<b class='ms'>The Setup</b>23K members spending ~$3K/year were churning — and not over price. Surveys kept surfacing the same line: “I'm spending a lot, but I don't know if it's working.” Progress lived in subjective notes and inconsistent photos. The real risk was a lack of objective proof.<b class='ms'>The Hard Part</b>The easy retention plays — discounts, loyalty points, deflection offers — were band-aids that ate margin and dodged the cause. Betting on computer-vision skin analysis meant a vendor integration and real workflow friction: the SDK forced three-photo captures with a full restart on any failure, and district managers escalated that it slowed appointments.<b class='ms'>What I Did</b><ul><li>Ran 15+ client and staff interviews to confirm the “can't see progress” root cause</li><li>Integrated Perfect Corp's CV skin assessment into the consultation flow for personalized recommendations</li><li>Pitched leadership on “workflow speed over feature load”; piloted across 7 clinics with weekly feedback</li><li>Negotiated single-photo retakes with the vendor after staff pushback</li></ul><b class='ms'>Outcomes</b><ul><li>Membership renewals: +40%</li><li>Retention: +30% across 23K members (~$5M/mo MRR)</li></ul><b class='ms'>What I Learned</b>Members churn when they can't see progress — make the outcome visible and retention follows. And staff adoption is the product."},
+  {id:"ret",sec:"product",title:"Retention Snapshot",type:"Retention",bg:"linear-gradient(135deg,#0a1628,#1e3a5f)",tags:["Churn signals","Front-desk","Research"],
+   desc:"Real-time cancellation risk signals surfaced to front-of-house staff.",
+   detail:"<b class='ms'>The Setup</b>Front-desk staff had no way to tell which of 23K members were quietly drifting toward cancellation. The signals existed — membership age, visit frequency, what someone booked — but they were scattered, so churn risk stayed invisible until the member was already gone.<b class='ms'>The Hard Part</b>Churn risk isn't a single number, and front-of-house has seconds before a client walks in — not time to open a dashboard. The challenge was turning messy, fragmented context into one glanceable read a busy staffer would actually use in the moment.<b class='ms'>What I Did</b><ul><li>Ran discovery interviews across multiple clinic locations and traced churn back to 4+ fragmented tools as the root cause</li><li>Designed a single snapshot surfacing membership month, treatment cadence, service variety, and progress milestones</li><li>Surfaced cancellation-risk signals to front-of-house staff at the point of interaction, so they could intervene before a member churned</li></ul><b class='ms'>Outcomes</b><ul><li>Shipped a real-time churn-risk read covering the full 23K member base</li><li>Turned field research directly into a front-desk-facing feature</li></ul><b class='ms'>What I Learned</b>Front-desk staff act on what they can see in seconds — a glanceable signal beats a rich dashboard nobody has time to open."},
+  // ── Experiments & Research ──
+  {id:"lapse",sec:"experiments",title:"LapseAI",type:"Open Source",bg:"linear-gradient(135deg,#1f1400,#4a3200)",tags:["Python SDK","Observability","Waitlist"],
+   desc:"Python SDK for multi-agent observability — 7 behavioral signals, validated via developer waitlist.",
+   detail:"<b class='ms'>The Setup</b>Production AI observability tools like LangSmith and Langfuse log what an agent does — but not whether its reasoning actually matched its actions. In multi-agent systems, that gap is where silent failures hide.<b class='ms'>The Hard Part</b>“Did the agent do what it reasoned?” is fuzzy to measure. The work was turning intuitions — tool faithfulness, handoff integrity, loop detection — into signals concrete enough to compute, then proving developers actually wanted them before building a hosted platform.<b class='ms'>What I Did</b><ul><li>Built and open-sourced a Python SDK for multi-agent observability</li><li>Captured 7 behavioral signals including tool faithfulness, handoff integrity, loop detection, token cost, and latency</li><li>Validated demand via a developer waitlist before committing to the hosted platform</li></ul><b class='ms'>Outcomes</b><ul><li>Open-source SDK shipped</li><li>Demand validated via waitlist ahead of platform build</li></ul><b class='ms'>What I Learned</b>Validate demand before you build the platform — and the gap nobody measures (reasoning vs. action) is often the real product."},
+  {id:"asr",sec:"experiments",title:"ASR Benchmarking",type:"Model Evaluation",bg:"linear-gradient(135deg,#0d1a1f,#0f4a5e)",tags:["ASR","Hindi","Metrics"],
+   desc:"Benchmarked Whisper vs Sarvam on Hindi audio — used “zero-editing rate” as a UX proxy.",
+   detail:"<b class='ms'>The Setup</b>Choosing an ASR model for Hindi audio needed a real head-to-head — and, more importantly, a metric that reflects whether a transcript is actually usable rather than just a benchmark score.<b class='ms'>The Hard Part</b>WER (word error rate) is the academic standard, but it doesn't tell you if a human can use the output as-is. The PM question isn't “how many words are wrong” — it's “can someone ship this transcript without editing it.”<b class='ms'>What I Did</b><ul><li>Benchmarked OpenAI Whisper vs Sarvam AI on Hindi transcription</li><li>Proposed “zero-editing rate” — usable without edits — as the real PM metric over raw WER</li></ul><b class='ms'>Outcomes</b><ul><li>Whisper WER: 172%</li><li>Sarvam WER: 8.3%</li></ul><b class='ms'>What I Learned</b>Pick the metric that matches the user's job — usability, not the academic benchmark."},
 ];
 
 const E = [
@@ -373,29 +426,6 @@ const E = [
 
 const SK = ["AI Agent Development","Retention & Loyalty Agent","RAG Pipelines","LLM Evaluation","Prompt Engineering","Conversational AI","Voice AI","Guardrail Design","Churn Prediction","Agentic Orchestration","Python","SQL (PostgreSQL)","Pinecone","LangSmith","GA4","Amplitude","Sentry","A/B Testing","Multi-Tenant SaaS","SMB User Research","Firebase","Agile/Scrum","Stakeholder Management"];
 
-const ST = [
-  {id:"s1",ep:"S1 · E01",title:"The AI Brain for a 50-Clinic Business",type:"Case Study",bg:"linear-gradient(135deg,#0d1b2a,#1b3a5e)",tags:["RAG","Orchestration","LangSmith"],
-   desc:"How I designed and shipped SkinLaundryWiki — an internal knowledge agent connecting five data sources into one Slack interface.",
-   detail:"The architecture: orchestrator routes to specialist agents based on intent. RAG on Pinecone for semantic retrieval. LangSmith tracing on every query. Daily sync keeps sources fresh. Built solo, shipped in six weeks. Replaced hours of weekly context-switching for the product and engineering team."},
-  {id:"s2",ep:"S1 · E02",title:"Why We Killed the Booking Funnel",type:"Product · AI",bg:"linear-gradient(135deg,#1a0000,#3a0000)",tags:["Choice fatigue","LLM vs rules","Eval-first","$150K"],
-   desc:"60% of ad traffic bounced in two minutes. The funnel wasn't converting — it was overwhelming. So I replaced it with a conversational agent.",
-   detail:"<strong>What was broken:</strong> 60% of new users from Meta ads left within two minutes; ~70% browsed three or more services and never booked. Not a demand problem — a decision problem. We were handing overwhelmed people a 15-item menu and a rule-based funnel that broke the moment someone asked two things at once.<br><br><strong>The hard calls:</strong> Why I bet on an LLM over fixing the rules. The tradeoffs I accepted to ship — including an agent that drifted toward clinical advice before I reined it in. And why I ended up routing two different models at two different jobs.<br><br><strong>The outcome:</strong> 68% → 85% booking completion, 8 → 5 minute time-to-book, ~$150K projected annual lift, guardrail violations cut from ~18% to ~6%.<br><br><strong>What I learned:</strong> Your evaluation system is the product. We shipped first and measured second — the medical-advice answers that reached users were the price of that order, and I'd never run it that way again."},
-  {id:"s3",ep:"S1 · E03",title:"The $1.8M Hunch",type:"Product · Growth",bg:"linear-gradient(135deg,#001a00,#003d00)",tags:["Diagnosis-first","Full-funnel A/B","Wrong at first","$1.8M"],
-   desc:"Paid traffic was converting below its volume. A hunch, two debugging tools, and a wrong first guess later — $1.8M recovered.",
-   detail:"<strong>What was broken:</strong> No alarm caught it. Reviewing ad ROI, I noticed paid traffic was converting below its volume — then GA4 showed a 60% mobile checkout cliff bleeding the return on every ad dollar.<br><br><strong>The hard calls:</strong> My first hypothesis was wrong, and Sentry proved it. Why I refused to just ship the obvious fix. And how I made sure faster checkout didn't quietly tank show-up and membership rates downstream.<br><br><strong>The outcome:</strong> ~50% fewer failed checkouts, ~$150K/month recovered — $1.8M annualized — in two sprints.<br><br><strong>What I learned:</strong> Diagnosis is the whole job. I spent 70% of this figuring out what was actually happening and 30% fixing it — and that ratio is why the number moved."},
-  {id:"s4",ep:"S1 · E04",title:"Clinic Diaries",type:"Research",bg:"linear-gradient(135deg,#1a1200,#3a2a00)",tags:["SMB Research","User Interviews","Retention"],
-   desc:"Two clinic visits. 12+ staff conversations. One insight: fragmented client context is the silent killer of retention.",
-   detail:"Staff were cross-referencing the CRM, Gmail, printed promos, and personal notes before every client arrived. No one could anticipate churn risk. Personalization was guesswork. The research became the Retention Snapshot Module — cancellation risk signals, membership status, personalization cues, in one view."},
-  {id:"s5",ep:"S1 · E05",title:"Retention Isn't a Discount Problem",type:"Product · Retention",bg:"linear-gradient(135deg,#0d1a0d,#1a3d1a)",tags:["Proof > promos","Vendor mgmt","Staff adoption","+40% renewals"],
-   desc:"23K members were churning — not over price, but because they couldn't see if it was working. I chose proof over promos.",
-   detail:"<strong>What was broken:</strong> 23K high-value members (~$3K/year) kept saying the same thing in surveys: “I'm spending a lot, but I don't know if it's working.” Not a price objection — missing proof. Progress lived in vocal notes and inconsistent before/after photos.<br><br><strong>The hard calls:</strong> Why I killed the obvious discount and loyalty plays. Why I bet on AI skin analysis instead. And the vendor fight I had to pick when the tool started slowing clinics down mid-rollout.<br><br><strong>The outcome:</strong> 40% higher renewals and 30% retention lift across 23K members on ~$5M/month MRR.<br><br><strong>What I learned:</strong> Staff adoption is the product. The best AI in the world fails if the person holding the iPad resents using it — and that nearly happened here."},
-  {id:"s6",ep:"S1 · E06",title:"Building for a Million Students",type:"Scale",bg:"linear-gradient(135deg,#0d0d1a,#2d2d5e)",tags:["EdTech","Scale","Data"],
-   desc:"From content creator to APM at BYJU's — iterating on live sessions for 1M+ K-10 students.",
-   detail:"Started as Product Developer on the CMS/LMS. Built root cause analysis on session drop-off — lifted class ratings 4.65 → 4.85, post-class engagement 60% → 85%. Moved to APM leading 10+ people shipping 60+ sessions to 1M+ students. 25% satisfaction lift, 60% efficiency gain through Agile redesign."},
-  {id:"s7",ep:"S1 · E07",title:"Shipping Healthcare Software Without Breaking It",type:"Product · 0→1",bg:"linear-gradient(135deg,#001529,#0a3d62)",tags:["Build vs buy","Saying no","Compliance","$1M saved"],
-   desc:"A 2-day approval bottleneck was capping growth. I built an offline-first iPad EMR — and learned you don't win arguments with the medical team.",
-   detail:"<strong>What was broken:</strong> Signing off one treatment meant clinicians bouncing across paper, desktop, and a web EMR. Approvals dragged 1–2 days, patients showed up with nothing ready, and spotty clinic Wi-Fi lost 1 in 10 charts. Leadership called it the blocker to scaling past 100 staff.<br><br><strong>The hard calls:</strong> Why I didn't just buy the incumbent EMR. What I killed to ship on time — including cutting five whole states out of V1. And two compliance fights with medical leadership I chose to lose.<br><br><strong>The outcome:</strong> ~$12 → ~$2 per approval (~$1M/year), the 1–2 day delay eliminated, chart loss from 10% to near zero across 50+ clinics.<br><br><strong>What I learned:</strong> In healthcare you don't win arguments with the medical team — you earn trust by respecting their guardrails, then optimizing inside them. The two times I got overruled taught me more than the launch did."},
-];
 
 const MODALS = {
   retention:{title:"The Retention Problem",type:"ORIGIN STORY",bg:"linear-gradient(135deg,#1a0000,#3d0000)",
@@ -403,14 +433,13 @@ const MODALS = {
    detail:"The research revealed: staff juggled the CRM/POS, Gmail, printed membership sheets, and personal notes for every client interaction. No one could see the full picture — churn risk, promo timing, personalization cues. All invisible. That fragmentation was the core retention failure. The solution became the Retention Snapshot Module — surfacing cancellation risk signals (membership month, treatment cadence, progress) to front-of-house staff in real time. Result: 30% retention lift across 23K members.",tags:[]},
 };
 P.forEach(p=>MODALS[p.id]={title:p.title,type:p.type.toUpperCase(),bg:p.bg,desc:p.desc,detail:p.detail,tags:p.tags});
-ST.forEach(s=>MODALS[s.id]={title:s.title,type:s.type.toUpperCase(),bg:s.bg,desc:s.desc,detail:s.detail,tags:s.tags});
 
 // ── RENDER ──────────────────────────────────────────────────────────────────
 
 function init(){
   document.getElementById('mrow').innerHTML=M.map(m=>`<div class="metric-card"><div class="metric-val">${m.v}</div><div class="metric-lbl">${m.l}</div><div class="metric-sub">${m.s}</div></div>`).join('');
 
-  document.getElementById('prow').innerHTML=P.map(p=>`
+  const card=p=>`
     <div class="show-wrap" onclick="openModal('${p.id}')">
       <div class="show-card" style="background:${p.bg}">
         <div class="show-ov"></div>
@@ -421,7 +450,13 @@ function init(){
         <div class="show-desc">${p.desc.slice(0,88)}…</div>
         <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       </div>
-    </div>`).join('');
+    </div>`;
+  document.getElementById('prow-ai').innerHTML=P.filter(p=>p.sec==='ai').map(card).join('');
+  document.getElementById('prow-prod').innerHTML=P.filter(p=>p.sec==='product').map(card).join('');
+  document.getElementById('prow-exp').innerHTML=P.filter(p=>p.sec==='experiments').map(card).join('');
+  document.getElementById('eprow-ai').innerHTML=P.filter(p=>p.sec==='ai').map(card).join('');
+  document.getElementById('eprow-prod').innerHTML=P.filter(p=>p.sec==='product').map(card).join('');
+  document.getElementById('eprow-exp').innerHTML=P.filter(p=>p.sec==='experiments').map(card).join('');
 
   document.getElementById('econ').innerHTML=E.map(e=>`
     <div class="exp-card">
@@ -431,19 +466,6 @@ function init(){
     </div>`).join('');
 
   document.getElementById('scon').innerHTML=SK.map(s=>`<span class="skill-tag">${s}</span>`).join('');
-
-  document.getElementById('srow').innerHTML=ST.map(s=>`
-    <div class="ep-card" onclick="openModal('${s.id}')">
-      <div class="ep-thumb" style="background:${s.bg}">
-        <div class="ep-ov"></div>
-        <div class="ep-ep">${s.ep}</div>
-        <div class="ep-title">${s.title}</div>
-      </div>
-      <div class="ep-body">
-        <div class="ep-desc">${s.desc}</div>
-        <div class="tags" style="margin-top:10px">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      </div>
-    </div>`).join('');
 }
 
 // ── NAV SCROLL EFFECT ────────────────────────────────────────────────────────
@@ -484,7 +506,7 @@ function openModal(id){
     </div>
     <div class="modal-body">
       <p class="modal-desc">${d.desc}</p>
-      ${d.detail?`<p class="modal-detail">${d.detail}</p>`:''}
+      ${d.detail?`<div class="modal-detail">${d.detail}</div>`:''}
       ${d.tags&&d.tags.length?`<div class="tags" style="margin-top:14px">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
     </div>`;
   document.getElementById('mbg').classList.add('open');
